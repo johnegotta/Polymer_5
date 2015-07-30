@@ -1,0 +1,20 @@
+<link rel="import" href="fc2-john-inputarea.html">
+<link rel="import" href="fc2-john-outputarea.html">
+
+<dom-module id="fc2-john-inoutholder">
+	<template>
+		<fc2-john-inputarea id="inp" test_value={{crap}}></fc2-john-inputarea>
+		<fc2-john-outputarea id="outp" gotten_value=[[crap]]></fc2-john-outputarea>
+	</template>
+	<script>
+	  Polymer({
+	    is: 'fc2-john-inoutholder',
+	    properties: {
+	      crap: {
+	        type: String,
+	        value: ''
+	      }
+	    }
+	  });
+	</script>
+</dom-module>

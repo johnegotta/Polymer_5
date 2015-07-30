@@ -1,0 +1,25 @@
+<dom-module id="fc2-phoneLogEntry">
+	<style>
+		paper-material{
+		  padding:20px;
+		  font: 13px;
+		  color: black;
+		  background:#efefef;
+		  font-weight: 500;
+		  border-radius: 8px;
+		  margin: 4px;
+		  border 2px ridge-dashed silver;
+		}
+		:host.white paper-material{
+		  background: #fff;
+		}
+	</style>
+	<template>
+		<paper-material elevation="3"><content></content></paper-material>
+	</template>
+	<script>
+		Polymer({
+		  is: "fc2-phoneLogEntry"
+		});
+	</script>
+</dom-module>

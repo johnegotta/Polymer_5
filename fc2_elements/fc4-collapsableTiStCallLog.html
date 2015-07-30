@@ -1,0 +1,34 @@
+<dom-module id="fc4-collapseCallLog">
+	<template>
+								
+		<style>
+		paper-material{
+		  padding:20px;
+		  font: 22px bold;
+		  color: #002c80;
+		  background:#aecdfe;
+		  font-weight: 800;
+		  border-radius: 8px;
+		  margin: 4px;
+		  border 2px ridge-dashed silver;
+		}
+	</style>
+	<template>
+		<paper-material ondblclick="hider"><span>{{content-of-call-entry}}<span></paper-material> 
+		<p id='regionToHide' hidden="{{hiding}}"><content></content></p>
+	</template>
+	<script>
+	fc4-collapseCallLog()=Polymer({
+		  is: "fc4-collapseCallLog",  
+     		  properties: {
+     		  	hiding: {
+     		  		type: Boolean,
+     		  		value: true
+     		  	}
+     		  },
+          	  hider: function(){
+          	  	this.hiding = !this.hiding;
+          	  },
+		});
+	</script>
+</dom-module>

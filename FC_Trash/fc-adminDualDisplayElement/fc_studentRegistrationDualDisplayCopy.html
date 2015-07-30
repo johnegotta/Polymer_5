@@ -1,0 +1,166 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<dom-module id='fc-newStudentRegistration'>
+<style>
+table, th, td {
+    border: 0px ridge #aecdfe;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 0px 5px 10px 20px;
+    text-align: left;
+}
+table#t01 {
+    width: auto;    
+    background-color: #f1f1c1;
+}
+.FC_Student_Contact_Fieldset {
+	position: center;
+}
+
+.FC_Parent_Contact_Fieldset {
+	position: center;
+}
+
+
+p {text-indent: 20px;}
+
+.questions { 
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	 -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+		font-size:15px;
+}
+.Focused_Data_Assistant_Class { 
+	width: 39%;
+	background: white;
+	display: block;
+	height: 100%;
+	float: right;
+}
+
+fieldset {
+	border: 4px solid #aecdfe;
+	background: #f4f4f4;
+	border-radius: 8px
+}
+
+legend { 
+font-size: 18px;
+}
+.form_header {
+	font-size: 20px;
+	font-weight: 800;
+	background: #aecdfe;
+	margin: -7px -12px;
+	padding: 10px;
+	color: #002c80;
+	border-radius: 3px;
+	halign: center;
+}	
+.FC_form_table {
+	color: #002c80;
+}
+
+.callButton { 
+border-radius: 4px;
+float: right;}
+</style>
+<!--<template is="dom-bind"> -->
+<template>
+<form is="iron-form" id="base_form" class="fc-firstForm" method="post">
+		<fieldset id="FC_Student_Contact_Fieldset" name="FC_Student_Contact_Fieldset" class="FC_Student_Contact_Fieldset">
+				<div class="form_header">Student Contact Information</div>
+				<table class="FC_form_table">
+						<tr>
+								<th>First Name: 
+								<br> <input is="iron-input" bind-value="{{studentFirstName}}" type="string" name="studentFirstName" id="first_name" placeholder="Student First Name"> 
+								</th>
+								<th>Last Name: 
+								<br>
+								<input is="iron-input" bind-value="{{studentLastName}}" type="string" id="studentLastName" name="studentLastName" placeholder="Student Last Name">
+								</th>
+						</tr>
+						<tr>
+								<th>Telephone:
+								<br>
+								<input is="iron-input" bind-value="{{studentPhone}}" type="string" id="studentPhone" type="string" name="studentPhone" placeholder="Student Phone Number"> 
+								</th>
+								<th>Student Email:
+								<br>
+								<input is="iron-input" bind-value="{{studentEmail}}" id="studentEmail" type="string" name="studentEmail" placeholder="Student Email" prevent-invaild-input allowed-pattern="*">
+								</th>
+						</tr>
+						<tr>
+								<th>Street Address: 
+								<br>
+								<input is="iron-input" bind-value="{{studentStreetAdress}}" id="studentStreetAddress" type="string" name="studentStreetAddress" placeholder="Street Address (Optional)">
+								</th>
+								<th>City Address: 
+								<br><input is="iron-input" bind-value="{{studentCityAdress}}" id="studentCityAddress" type="string" name="studentCityAddress" placeholder="City Address (Optional)">
+								</th>		
+						</tr>
+						<tr>	<td>	<input type="submit" value="Submit">Submit</input></td>
+						</tr> 
+						<br>
+				</table>
+			</fieldset>
+		<br>
+	</template>
+</dom-module>
+		<script> 
+		//element registration
+		Polymer ({
+			is: "fc-newStudentRegistration",
+properties: {
+      studentFirstName: {
+        type: String,
+        studentFirstName: ''
+      },
+
+      studentLastName: {
+        type: String,
+        studentLastName: ''
+      },
+
+      studentPhone: {
+        type: String,
+        StudentPhone: ''
+      },
+
+      
+      studentEmail: {
+        type: String,
+        studentEmail: ''
+      },
+
+      studentStreetAdress: {
+        type: String,
+        value: ''
+      },
+
+      studentCityAddress: {
+        type: String,
+        value: ''
+      },
+
+    },
+
+    submit: function() {
+      var params = {"studentEmail":this.studentEmail,"studentLastName":this.studentLastName};
+      this.$.firebaseLogin.submit(params);
+      this.user.uid = this.$.firebaseLogin.user;
+    }
+  });
+  </script>
+		

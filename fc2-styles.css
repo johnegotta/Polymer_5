@@ -1,0 +1,14 @@
+@charset "utf-8";
+table, th, td {
+    border: 0px ridge #aecdfe;
+    border-collapse: collapse;
+}
+
+thead h3 {
+color:002c80;
+font-size: 20px;
+background: #aecdfe;
+}
+.callButton { 
+border-radius: 4px;
+float: right;}

@@ -1,0 +1,325 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<dom-module id="fc2-parentOneContactInfo">
+<style>
+
+table, th, td {
+    border: 0px ridge #aecdfe;
+    border-collapse: collapse;
+}
+
+table {
+	margin-left: 10px;
+	padding-left: 10px;
+		}
+		
+		
+th, td {
+    padding: 5px;
+    text-align: left;
+    margin: 5px;
+}
+
+tr {
+	display: flex;
+	}
+
+table#t01 {  
+    background-color: #f1f1c1;
+   
+}
+
+.form_header {
+	font-size: 20px;
+	font-weight: 800;
+	background: #aecdfe;
+	padding: 8px;
+	color: #002c80;
+	border-radius: 3px;
+	text-indent: 10px;
+}	
+.FC_form_table {
+	color: #002c80;
+	margin-top: 8px;
+	margin-bottom: 2px;
+	margin-left: 4px;
+}
+thead {
+color: #aecdfe;
+background: #002c80;
+
+}	
+</style>
+<template>
+  <firebase-document id="FBplace" location="focusedstaging1.firebaseio.com/users" data="{{users}}" log></firebase-document>
+<fc2-papermaterial on-tap="toggleForm">
+				  <div class="horizontal layout center">
+				    <div class="flex">Parent One Contact Information</div>
+				    <div><iron-icon id="headerParentOneIcon" icon="icons:add"></iron-icon></div>
+				  </div>
+				</fc2-papermaterial>
+				<iron-collapse id="collapsedParentOneForm">
+				<paper-form elevation="2" _parentForm="focusedStudentRecordForm">
+					<table class="FC_form_table flex">
+						<tr class="flex">
+								<th>
+								<paper-input value="{{parentOneFirstName}}" autocomplete="given-name" id="parentOneFirstName" label="Parent First Name" name="parentOneFirstName">
+								</paper-input> 
+								</th>
+								<th>
+								<paper-input value="{{parentOneLastName}}" autocomplete="family-name" type="string" id="parentOneLastName" name="parentOneLastName" label="Parent Last Name">
+								</paper-input>
+								</th>
+								<th><gold-phone-input value="{{parentOnePhone}}" autocomplete="on" id="parentOnePhone">
+								</gold-phone-input> 
+								</th>
+								<th><gold-email-input auto-validate required value="{{parentOneEmail}}" autocomplete="email" id="parentOneEmail">
+								</gold-email-input>
+								</th>
+								
+						</tr>
+						<tr>
+								<th>
+								<paper-input value="{{parentOneStreetAddress}}" id="parentOneStreetAddress" autocomplete="address-line1" label="Address">
+								</paper-input>
+								</th>
+								<th><paper-input value="{{parentOneCityAddress}}" id="parentOneCityAddress" autocomplete="address-line2" label="Address">
+								<paper-input>
+								</th>
+								<th>
+								<paper-input value= "{{parentOneState}}" id="State" label="U.S. State"></paper-input>
+								</th>
+								<th>
+								<gold-zip-input value= "{{parentOneZipCode}}" id="parentOneZipCode" label="Zip Code" autocomplete="postal-code">
+								</gold-zip-input>
+								</th>	
+								
+						</tr>	
+					<br>
+				</table>
+				</paper-form>
+	</iron-collapse>
+</template>
+<script>
+
+Polymer ({
+  is: "fc2-parentOneContactInfo",
+  properties: {
+     
+  	parentOneFirstName: {
+  	  type: String,
+  	  value: ''
+  	},
+  	parentOneLastName: {
+  	  type: String,
+  	  value: ''
+  	},
+  	parentOneEmail: {
+  	  type: String,
+  	  value: ''
+  	},
+  	parentOneStreetAddress: {
+  	  type: String,
+  	  value: ''
+  	},
+  	parentOneCityAddress: {
+  	  type: String,
+  	  value: ''
+  	},
+ 	parentOneZipCode: {
+  	  type: String,
+  	  value: ''
+  	},
+  	parentOneZipCode: {
+  	  type: String,
+  	  value: ''
+  	},
+  	parentOneState: {
+  	  type: String,
+  	  value: ''
+  	}
+     
+  },
+  addParentOneContactInfoToUsers: function(){
+    	this.$.FBplace._setRemoteDocumentChild(this.new_user_uid, {
+    		"parentOneFirstName": this.parentOneFirstName,
+    		"parentOneLastName": this.parentOneLastName,
+    		"parentOneEmail": this.parentOneEmail,
+    		"parentOneStreetAddress": this.parentOneStreetAddress,
+    		"parentOneCityAddress": this.parentOneCityAddress,
+    		"parentOnePhone": this.parentOnePhone
+    		});
+    },
+	    toggleForm: function(){
+    	this.$.collapsedParentOneForm.toggle();
+    	this.$.headerParentOneIcon.icon = this.$.collapsedParentOneForm.opened ? "icons:remove":"icons:add";
+    }
+	
+});
+  </script>
+  </dom-module>						
+	<!--
+<dom-module id="fc2-parentOneContactInfo">
+<style>
+
+table, th, td {
+    border: 0px ridge #aecdfe;
+    border-collapse: collapse;
+}
+
+table {
+	margin-left: 10px;
+	padding-left: 10px;
+		}
+		
+		
+th, td {
+    padding: 5px;
+    text-align: left;
+    margin: 5px;
+}
+
+tr {
+	display: flex;
+	}
+
+table#t01 {  
+    background-color: #f1f1c1;
+   
+}
+
+.form_header {
+	font-size: 20px;
+	font-weight: 800;
+	background: #aecdfe;
+	padding: 8px;
+	color: #002c80;
+	border-radius: 3px;
+	text-indent: 10px;
+}	
+.FC_form_table {
+	color: #002c80;
+	margin-top: 8px;
+	margin-bottom: 2px;
+	margin-left: 4px;
+}
+thead {
+color: #aecdfe;
+background: #002c80;
+
+}	
+</style>
+<template>
+  <firebase-document id="FBplace" location="focusedstaging1.firebaseio.com/users" data="{{users}}" log></firebase-document>
+<fc2-papermaterial click="{{addParentContactInfoToUsers}}">Parent One Contact Information</fc2-papermaterial>
+				<paper-form elevation="2" _parentForm="focusedStudentRecordForm">
+					<table class="FC_form_table flex">
+						<tr class="flex">
+								<th>
+								<paper-input value="{{parentOneFirstName}}" autocomplete="given-name" id="parentOneFirstName" label="Parent First Name" name="parentOneFirstName">
+								</paper-input> 
+								</th>
+								<th>
+								<paper-input value="{{parentOneLastName}}" autocomplete="family-name" type="string" id="parentOneLastName" name="parentOneLastName" label="Parent Last Name">
+								</paper-input>
+								</th>
+								<th><gold-phone-input value="{{parentOnePhone}}" autocomplete="on" id="parentOnePhone">
+								</gold-phone-input> 
+								</th>
+								<th><gold-email-input auto-validate required value="{{parentOneEmail}}" autocomplete="email" id="parentOneEmail">
+								</gold-email-input>
+								</th>
+								
+						</tr>
+						<tr>
+								<th>
+								<paper-input value="{{parentOneStreetAddress}}" id="parentOneStreetAddress" autocomplete="address-line1" label="Address">
+								</paper-input>
+								</th>
+								<th><paper-input value="{{parentOneCityAddress}}" id="parentOneCityAddress" autocomplete="address-line2" label="Address">
+								<paper-input>
+								</th>
+								<th>
+								<paper-input value= "{{parentOneState}}" id="State" label="U.S. State"></paper-input>
+								</th>
+								<th>
+								<gold-zip-input value= "{{parentOneZipCode}}" id="parentOneZipCode" label="Zip Code" autocomplete="postal-code">
+								</gold-zip-input>
+								</th>	
+								
+						</tr>	
+					<br>
+				</table>
+				</paper-form>
+</template>
+<script>
+
+Polymer ({
+  is: "fc2-parentOneContactInfo",
+  properties: {
+     
+  	parentOneFirstName: {
+  	  type: String,
+  	  value: ''
+  	},
+  	parentOneLastName: {
+  	  type: String,
+  	  value: ''
+  	},
+  	parentOneEmail: {
+  	  type: String,
+  	  value: ''
+  	},
+  	parentOneStreetAddress: {
+  	  type: String,
+  	  value: ''
+  	},
+  	parentOneCityAddress: {
+  	  type: String,
+  	  value: ''
+  	},
+ 	parentOneZipCode: {
+  	  type: String,
+  	  value: ''
+  	},
+  	parentOneZipCode: {
+  	  type: String,
+  	  value: ''
+  	},
+  	parentOneState: {
+  	  type: String,
+  	  value: ''
+  	}
+     
+  },
+  addParentOneContactInfoToUsers: function(){
+    	this.$.FBplace._setRemoteDocumentChild(this.new_user_uid, {
+    		"parentOneFirstName": this.parentOneFirstName,
+    		"parentOneLastName": this.parentOneLastName,
+    		"parentOneEmail": this.parentOneEmail,
+    		"parentOneStreetAddress": this.parentOneStreetAddress,
+    		"parentOneCityAddress": this.parentOneCityAddress,
+    		"parentOnePhone": this.parentOnePhone
+    		});
+    }
+});
+  </script>
+  </dom-module>						
+		-->

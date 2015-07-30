@@ -1,0 +1,38 @@
+<dom-module id="fc-displayToggle">
+<style>
+.none{
+	
+	display: none;
+}
+
+.appear{
+	display: block;
+	}
+</style>
+<template id="fc-displayToggleTemplate">
+						
+<paper-toggle-button id="fc-displayToggle" change></paper-toggle-button>  
+<div id="regionToHide" class="none"> <h3>HELLLO</h3></div>
+
+</template?
+</dom-module>
+<script>
+Polymer({
+    is: 'fc-displayToggle',
+   },
+   alert("we are still alive, jim!!");
+   );   
+   
+ready: function () {
+  this.$.fc-displayToggle.addEventListener('change', function () {
+  var hiddenRegion=document.getElementById("regionToHide").getAttribute("class");
+    if (this.checked) {
+    	hiddenRegion="appear";
+     
+    } else {
+     	hiddenRegion="none";
+    	}
+
+	}
+}
+</script>

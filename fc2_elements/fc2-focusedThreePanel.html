@@ -1,0 +1,148 @@
+<dom-module id="fc2-focusedThreePanel">
+<style>
+.leftPanel {
+	border:3px ridge #aecdfe;
+	height:99.7vh;
+	overflow-y: scroll;
+	margin: .5px;
+	}
+.topRightPanel{
+	border:3px ridge #aecdfe;
+	height:39.9vh;
+	overflow-y: scroll;
+}
+
+.bottomRightPanel{
+	border:3px ridge #aecdfe;
+	height:59.5vh;
+	overflow-y: scroll;
+}
+ input {
+      padding: 0.4em;
+      font-size: 12px;
+      margin: 6px 0;
+      width: 45px;
+    }
+    
+    
+    
+    table,
+    th,
+    td {
+      border: 0px ridge #aecdfe;
+      border-collapse: collapse;
+    }
+    
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+      border:0px;
+      border-color:#f1f1c1;
+    }
+    
+    table#t01 {
+      background-color: #f1f1c1;
+      margin-left: 30px;
+    }
+    
+    .form_header {
+      font-size: 20px;
+      font-weight: 800;
+      background: #aecdfe;
+      padding: 12px;
+      color: #002c80;
+      text-indent: 12px;
+    }
+    
+    .FC_form_table {
+      color: #002c80;
+    }
+</style>
+<template id="fc2-threePanel">
+<div class="horizontal layout container" height="100vh" width="100vw">
+  	<div class="flex leftPanel">
+  	
+
+ 		<fc2-studentContactInfo class="flex" value='{{users}}' data='{{callers}}'></fc2-studentContactInfo>
+
+<br>
+		<fc2-parentOneContactInfo id="fc2-parentOneContactInfo" class="flex"></fc2-parentOneContactInfo>
+     		<br>
+     		<fc2-parentTwoContactInfo class="flex" value='{{users}}' items="{{callers}}" item="{{this.caller.item}}"></fc2-parentTwoContactInfo>
+     		""
+     		
+    	
+  	</div>
+  
+  	<div class="vertical layout container flex" height="100vh">
+  		<div class="flex-2 topRightPanel">
+  	<dom-module id="student-list3">
+  	<template>
+  			<h2> Find a Student</h2>
+  			<firebase-collection order-by-child="studentLastName" limit-to-first="5" location="https://focusedstaging1.firebaseio.com/users" data="{{users}}">
+      			</firebase-collection>
+    		
+    		<template is="dom-repeat" items="[[users]]" as="simplelogin">
+      			<h4>[[simplelogin.__firebaseKey__]]</h4>
+      				<tr><th><span>Student: </span></th><td><span>[[simplelogin.lastname]]</span>, <span>[[simplelogin.firstname]]</span></td>
+    		</template>
+    	</template>
+    		<script>
+  Polymer({
+      is: 'student-list3',
+      ready: function() {
+        this.users = [
+            {first: simplelogin.firstname, last: simplelogin.lastname}
+        ];
+      },
+      toggleSelection: function(e) {
+        var item = this.$.studentList3.itemForElement(e.target);
+        this.$.selector.select(item);
+      }
+    });
+  </script>
+    		
+  		</dom-module>
+  </div><!--top right-->
+  <div class="bottomRightPanel flex-3">
+  
+  <paper-form elevation="2">
+  <fieldset border="true"><legend> Focused Student Record</legend>
+  				<table class="FC_form_table flex">
+  				
+      						
+      						
+						<tr class="flex">
+							<th>Full Name:</th>
+							<td><input is="iron-input" value='{{simplelogin.studentFirstName}}' border='0'></td>
+							<span> </span>
+							<td><input is="iron-input" value='{{simplelogin.studentLastName}}' border='0'></td>
+						</tr>
+						<tr>
+						
+							<th>Telephone:</th><span><td><input is="iron-input" value='{{simplelogin.studentPhone}}' border='0 collapse'></td>
+						</tr>
+						<tr>
+							<br><th> Student Email:</th><td><input is="iron-input" value='{{simplelogin.studentEmail}}' border="0"></td>
+						</tr>
+						<tr>
+							<th>Address:</th><td><input is="iron-input" value='{{simplelogin.studentStreetAddress}}' border="0"></td>
+							<td><input is="iron-input" border='0'value='{{simplelogin.studentCityAddress}}'></td>									
+						</tr>
+						
+						</legend>
+		</table>	</fieldset></paper-form>
+		</div><!--bottom right-->
+	<div class="flex-1 verticle layout container" height="100vh">
+
+  	</div>
+  	</div><!--verticle layout container--> 
+  </div><!--horizontal layout container-->
+  </div>
+</template>
+<script>
+Polymer({
+is: "fc2-focusedThreePanel"});
+</script>
+</dom-module>

@@ -1,0 +1,257 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<dom-module id="fc2-parentTwoContactInfo">
+<style>
+
+table, th, td {
+    border: 0px ridge #aecdfe;
+    border-collapse: collapse;
+}
+
+table {
+	margin-left: 20px;
+		}
+		
+		
+th, td {
+    padding: 5px;
+    text-align: left;
+    margin: 5px;
+}
+
+tr {
+	display: flex;
+	}
+
+table#t01 {  
+    background-color: #f1f1c1;
+   
+}
+
+.form_header {
+	font-size: 20px;
+	font-weight: 800;
+	background: #aecdfe;
+	padding: 8px;
+	color: #002c80;
+	border-radius: 3px;
+	text-indent: 10px;
+}	
+.FC_form_table {
+	color: #002c80;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	margin-left: 8px;
+}
+thead {
+color: #aecdfe;
+background: #002c80;
+
+}	
+
+</style>
+<template>
+  <firebase-document id="FBplace" location="focusedstaging1.firebaseio.com/users" data="{{user}}" items="{{user}}" item="{{user.item}}" log></firebase-document>
+  <fc2-papermaterial on-tap="toggleForm">
+	<div class="horizontal layout center">
+		<div class="flex">Parent Two Contact Information</div>
+			<div><iron-icon id="headerParentTwoIcon" icon="icons:add"></iron-icon></div>
+				  </div>
+				</fc2-papermaterial>
+				<iron-collapse id="collapsedParentTwoForm">
+				<paper-form elevation="2" _parentForm="focusedStudentRecordForm">		
+					<table class="FC_form_table flex">
+						<tr>
+								<th>
+								<paper-input value="{{parentTwoFirstName}}" autocomplete="on" id="parentTwoFirstName" label="Parent First Name" name="parentTwoFirstName">
+								</paper-input> 
+								</th>
+								<th>
+								<paper-input value="{{parentTwoLastName}}" autocomplete="on" type="string" id="parentTwoLastName" name="parentTwoLastName" label="Parent Last Name">
+								</paper-input>
+								</th>
+								<th><gold-phone-input value="{{parentTwoPhone}}" autocomplete="on" id="parentTwoPhone">
+								</gold-phone-input> 
+								</th>
+								<th><gold-email-input auto-validate required value="{{parentTwoEmail}}" autocomplete="on" id="parentTwoEmail">
+								</gold-email-input>
+								</th>
+								
+						</tr>
+						<tr>
+								<th>
+								<paper-input value="{{parentTwoStreetAddress}}" id="parentTwoStreetAddress" autocomplete="on" label="Address">
+								</paper-input>
+								</th>
+								<th><paper-input value="{{parentTwoCityAddress}}" id="parentTwoCityAddress" autocomplete="on" label="Address">
+								<paper-input>
+								</th>
+								<th>
+								<paper-input value="{{parentTwoState}} "id="State" label="U.S. State"></paper-input>
+								</th>
+								<th>
+								<gold-zip-input> value="{{parentTwoZipCode}}" id="parentTwoZipCode" label="Zip Code">
+								</gold-zip-input>
+								</th>	
+								
+						</tr>	
+					<br>
+				</table>
+				</paper-form>
+	</iron-collapse>
+</template>
+<script>
+Polymer ({
+  is: "fc2-parentTwoContactInfo",
+  addParentContactInfoToUsers: function(){
+    	this.$.FBplace._setRemoteDocumentChild(this.new_user_uid, {
+    		"parentTwoFirstName": this.parentTwoFirstName,
+    		"parentTwoLastName": this.parentTwoLastName,
+    		"parentTwoEmail": this.parentTwoEmail,
+    		"parentTwoStreetAddress": this.parentTwoStreetAddress,
+    		"parentTwoCityAddress": this.parentTwoCityAddress,
+    		"parentTwoPhone": this.parentTwoPhone
+    		});
+    },
+	 toggleForm: function(){
+    	this.$.collapsedParentTwoForm.toggle();
+    	this.$.headerParentTwoIcon.icon = this.$.collapsedParentTwoForm.opened ? "icons:remove":"icons:add";
+    }
+	
+    /*update Local object??*/
+});
+
+  </script>	
+  </dom-module>					
+<!--		
+
+<dom-module id="fc2-parentTwoContactInfo">
+<style>
+
+table, th, td {
+    border: 0px ridge #aecdfe;
+    border-collapse: collapse;
+}
+
+table {
+	margin-left: 20px;
+		}
+		
+		
+th, td {
+    padding: 5px;
+    text-align: left;
+    margin: 5px;
+}
+
+tr {
+	display: flex;
+	}
+
+table#t01 {  
+    background-color: #f1f1c1;
+   
+}
+
+.form_header {
+	font-size: 20px;
+	font-weight: 800;
+	background: #aecdfe;
+	padding: 8px;
+	color: #002c80;
+	border-radius: 3px;
+	text-indent: 10px;
+}	
+.FC_form_table {
+	color: #002c80;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	margin-left: 8px;
+}
+thead {
+color: #aecdfe;
+background: #002c80;
+
+}	
+
+</style>
+<template>
+  <firebase-document id="FBplace" location="focusedstaging1.firebaseio.com/users" data="{{user}}" items="{{user}}" item="{{user.item}}" log></firebase-document>
+<fc2-papermaterial click="{{addParentContactInfoToUsers}}">Parent Two Contact Information</fc2-papermaterial>
+				<paper-form elevation="2" _parentForm="focusedStudentRecordForm">		
+					<table class="FC_form_table flex">
+						<tr>
+								<th>
+								<paper-input value="{{parentTwoFirstName}}" autocomplete="on" id="parentTwoFirstName" label="Parent First Name" name="parentTwoFirstName">
+								</paper-input> 
+								</th>
+								<th>
+								<paper-input value="{{parentTwoLastName}}" autocomplete="on" type="string" id="parentTwoLastName" name="parentTwoLastName" label="Parent Last Name">
+								</paper-input>
+								</th>
+								<th><gold-phone-input value="{{parentTwoPhone}}" autocomplete="on" id="parentTwoPhone">
+								</gold-phone-input> 
+								</th>
+								<th><gold-email-input auto-validate required value="{{parentTwoEmail}}" autocomplete="on" id="parentTwoEmail">
+								</gold-email-input>
+								</th>
+								
+						</tr>
+						<tr>
+								<th>
+								<paper-input value="{{parentTwoStreetAddress}}" id="parentTwoStreetAddress" autocomplete="on" label="Address">
+								</paper-input>
+								</th>
+								<th><paper-input value="{{parentTwoCityAddress}}" id="parentTwoCityAddress" autocomplete="on" label="Address">
+								<paper-input>
+								</th>
+								<th>
+								<paper-input value="{{parentTwoState}} "id="State" label="U.S. State"></paper-input>
+								</th>
+								<th>
+								<gold-zip-input> value="{{parentTwoZipCode}}" id="parentTwoZipCode" label="Zip Code">
+								</gold-zip-input>
+								</th>	
+								
+						</tr>	
+					<br>
+				</table>
+		</paper-form>
+	</template>
+<script>
+Polymer ({
+  is: "fc2-parentTwoContactInfo",
+  addParentContactInfoToUsers: function(){
+    	this.$.FBplace._setRemoteDocumentChild(this.new_user_uid, {
+    		"parentTwoFirstName": this.parentTwoFirstName,
+    		"parentTwoLastName": this.parentTwoLastName,
+    		"parentTwoEmail": this.parentTwoEmail,
+    		"parentTwoStreetAddress": this.parentTwoStreetAddress,
+    		"parentTwoCityAddress": this.parentTwoCityAddress,
+    		"parentTwoPhone": this.parentTwoPhone
+    		});
+    }
+    /*update Local object??*/
+});
+
+  </script>	
+  </dom-module>		
+  
+  -->			
+		

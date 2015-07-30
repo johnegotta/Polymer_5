@@ -1,0 +1,110 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<dom-module id="fc-parentOneContactInfo">
+<style>
+
+#table, th, td {
+    border: 0px ridge #aecdfe;
+    border-collapse: collapse;
+}
+#th, td {
+    padding: 4px;
+    text-align: left;
+    margin: 4px;
+}
+#table #t01 {
+    width: auto;    
+    background-color: #f1f1c1;
+    margin: 5px;
+}
+
+
+
+.two_column { 
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	 -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+		font-size:15px;
+}
+.Focused_Data_Assistant_Class { 
+	width: 300px;
+	background: white;
+	display: block;
+	height: 100%;
+	overflow: scroll;
+	float: right;
+	margin: 40px;
+	border: 8px ridge #aecdfe;
+}
+
+.form_header {
+	font-size: 20px;
+	font-weight: 800;
+	background: #aecdfe;
+	margin: -7px -12px;
+	padding: 10px;
+	color: #002c80;
+	border-radius: 3px;
+	halign: center;
+}	
+</style>
+<template>
+<firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://focusedstaging1.firebaseio.com" >
+  <firebase-document id="FBplace" location="focusedstaging1.firebaseio.com/users" data="{{users}}" >
+  	
+			<div class="form_header">Parent One Contact Information</div>
+				<table class="FC_form_table">
+						<tr class="flex">
+								<th>Parent-1 First Name
+								<br><input is="iron-input" bind-value="{{parentOneFirstName}}" type="string" id="parentOneFirstName" name="parentOneFirstName" placeholder="Parent First Name"> </th>
+								<th>Parent-1 Last Name
+								<br>
+								<input is="iron-input" bind-value="{{parentOneLastName}}" type="string" id="parentOneLastName"  placeholder="Parent Last Name"></th>
+								<th>Parent-1 Telephone
+								<br><input is="iron-input" id="parentOnePhone" type="string" name="parentOnePhone" placeholder="Parent Phone Number"> </th>
+								<th>Parent-1 Email
+								<br>
+								<input is="iron-input" id="parentOneEmail" type="string" name="parentOneEmail" placeholder="Parent Email"></th>
+						</tr>
+						<tr class="flex">
+								<th>Parent-1 Address-1
+								<br><input is="iron-input" id="parentOneStreetAddress" type="string" name="parentOneStreetAddress" placeholder="Address (Optional)">
+								<th>Parent-1 Address-2	
+								<br><input is="iron-input" id="parentOneCityAddress" type="string" name="parentOneStreetAddress" placeholder="Address (Optional)"></th>	
+								
+								<th><select id="State"><option> STATE ONE</option><option> state 2</option></select></th>
+								<th>Parent-1 Zip<br><input is="iron-input" id="parentOneZipCode" type="string" name="parentOneZipCode" placeholder="Zip Code (Option)"></th>
+								</tr>
+						
+				</table>
+			
+    </firebase-document>
+</firebase-auth>
+</template>
+<script>
+
+Polymer ({
+  is: "fc-parentOneContactInfo",
+  addParentContactInfoToUsers: function(){
+    	this.$.FBplace._setRemoteDocumentChild(this.new_user_uid, {
+    		"parentOneFirstName": this.parentOneFirstName,
+    		"parentOneLastName": this.parentOneLastName,
+    		"parentOneEmail": this.parentOneEmail,
+    		"parentOneStreetAddress": this.parentOneStreetAddress,
+    		"parentOneCityAddress": this.parentOneCityAddress,
+    		"parentOnePhone": this.parentOnePhone
+    		});
+    }
+});
+					
+  </dom-module>	

@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>Focused Staging</title>
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+  <link rel="import" href="bower_components/polymer/polymer.html">
+  <link rel="import" href="bower_components/firebase-element/firebase.html">
+  <link rel="import" href="bower_components/firebase-element/firebase-document.html">
+  <link rel="import" href="bower_components/firebase-element/firebase-auth.html">
+  <link rel="import" href="bower_components/firebase-element/firebase-collection.html">
+  <link rel="import" href="bower_components/firebase-element/firebase-query-behavior.html">
+  <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+  <link rel="import" href="bower_components/paper-header-panel/paper-header-panel.html">
+  <link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
+  <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="bower_components/paper-menu/paper-menu.html">
+  <link rel="import" href="bower_components/paper-input/paper-input.html">
+  <link rel="import" href="bower_components/paper-button/paper-button.html">
+  <link rel="import" href="bower_components/paper-item/paper-item.html">
+  <link rel="import" href="bower_components/paper-material/paper-material.html">
+  <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+  <link rel="import" href="bower_components/iron-form/iron-form.html">
+  <link rel="import" href="bower_components/iron-input/iron-input.html">
+  <link rel="import" href="bower_components/iron-pages/iron-pages.html">
+  <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+  <link rel="import" href="bower_components/iron-icons/social-icons.html">
+  <link rel="import" href="bower_components/gold-email-input/gold-email-input.html">
+  <link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
+  <link rel="import" href="fc2_elements/fc2-login-form.html">
+  <link rel="import" href="fc2_elements/fc2-studentRegistrationTemplate.html">
+  <link rel="import" href="fc2_elements/fc2-displayToggle.html">
+  <link rel="import" href="fc2_elements/fc2-john-inoutholder.html">
+  <link rel="import" href="fc2_elements/fc2-papermaterial.html">
+  <link rel="stylesheet" href="fc2-styles.css">
+  
+  <link rel="import" href="fc2_elements/fc2-studentRegistrationElements/fc2-studentContactInfo.html">
+
+<!--fc2-studentContactInfo fc2-parentOneContactInfo fc2-parentTwoContactInfo-->
+<link rel="import" href="fc2_elements/fc2-studentRegistrationElements/fc2-studentContactInfo.html">
+<link rel="import" href="fc2_elements/fc2-studentRegistrationElements/fc2-parentOneContactInfo.html">
+<link rel="import" href="fc2_elements/fc2-studentRegistrationElements/fc2-parentTwoContactInfo.html">
+  <!-- Firebase -->
+<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="index.js"></script>
+</head>
+
+<body unresolved class="fullbleed layout vertical">
+
+  <span id="browser-sync-binding"></span>
+  
+  <template is="dom-bind" id="fc-index">
+  <paper-drawer-panel id="paperDrawerPanel">
+    <paper-header-panel drawer mode="seam">
+          <!-- Drawer Toolbar -->
+    	<paper-toolbar id="drawerToolbar">
+          <span class="paper-font-title">Menu</span>
+    	</paper-toolbar>
+        
+        <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
+          <a data-route="home" href="/Polymer_5/#home">
+            <iron-icon icon="home"></iron-icon>
+            <span>Home</span>
+          </a>
+          
+          <a data-route="login" href="/Polymer_5/#login">
+            <iron-icon icon="social:person"></iron-icon>
+            
+            <span>Login/Logout</span>
+          </a>
+          
+          <a data-route="users" href="/Polymer_5/#users">
+            <iron-icon icon="info"></iron-icon>
+            <span>Users</span>
+          </a>
+
+          <a data-route="contact" href="/Polymer_5/#contact">
+            <iron-icon icon="mail"></iron-icon>
+            <span>Contact</span>
+          </a>
+          
+          <a data-route="registration" href="/Polymer_5/#fc2-studentRegistrationTemplate">
+            <iron-icon icon="social:person"></iron-icon>
+            <span>New Student Registration</span>
+          </a>
+          
+           <a data-route="Toggle-Me-Smellmo" href="/Polymer_5/#fc2-displayToggle">
+            <iron-icon icon="social:person"></iron-icon>
+            <span>toggle me</span>
+          </a>
+
+          
+        </paper-menu>
+    </paper-header-panel>
+    
+    <paper-header-panel main mode="waterfall">
+            <!-- Main Toolbar -->
+        <paper-toolbar id="mainToolbar">
+          <paper-icon-button id="paperToggle" icon="menu"><paper-drawer-toggle></paper-icon-button>
+          <span class="paper-font-title flex"><h1>Focused Coaching</h1></span>
+            <paper-icon-button icon="social:person"></paper-icon-button>
+          <div>{{current_user.uid}}</div>
+        </paper-toolbar>
+           <paper-tabs>
+        	<div class="horizontal center-center layout">
+  		  <paper-tab class="horizontal-section">
+         	<iron-pages attr-for-selected="data-route" selected="{{route}}" style="padding:0px">
+
+			<section data-route="home">
+	<fc2-papermaterial>
+               	<h2 class="paper-font-display2">Home Page</h2>
+                	<p>This page will route users</p>
+               		
+               		<paper-button raised>Hey</paper-button>
+ 	</fc2-papermaterial>
+			</section>      
+ 	
+ 	<section data-route="login">	
+    <fc2-login-form id="FC_Login" user="{{current_user}}" statusKnown="{{status}}"></fc2-login-form>
+  </div>
+  </div>
+</section>
+
+            <section data-route="users">
+              <fc2-papermaterial>
+                <fc2-displayToggle>See Your Scores</fc2-displayToggle>
+              </fc2-papermaterial>
+            </section>
+
+            <section data-route="user-info">
+              <fc2-papermaterial elevation="1">
+                <h2 class="paper-font-display2">
+                User:<span>{{params.name}}</span>
+                </h2>
+                <div>This is <span>{{params.name}}</span>s section</div>
+              </fc2-papermaterial>
+            </section>
+
+            <section data-route="contact">
+              <fc2-papermaterial elevation="1">
+                <fc2-john-inoutholder></john-inoutholder>
+              </fc2-papermaterial>
+            </section>
+            
+            <section data-route="registration">
+   		<fc2-studentRegistration></fc2-studentRegistration>
+            </section>
+            
+
+          </iron-pages>
+  </div></paper-tab></paper-drawer><!--end three wide layout-->
+  <paper-tab> do it again</paper-tab>
+  <paper-tab> do it again</paper-tab>
+  </paper-tabs>
+  </div>
+
+</template>
+   <!-- build:js scripts/app.js -->
+  <script src="index.js"></script>
+  <script>function tester(){alert({{current_user.uid}});}</script>
+  <!-- endbuild-->
+</body>
+</html>

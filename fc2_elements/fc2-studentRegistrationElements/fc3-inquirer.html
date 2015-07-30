@@ -1,0 +1,127 @@
+<dom-module id="fc3-inquirer">
+  <style is="custom-style">
+.horizontal.layout.wrap div{
+	margin: 5px;
+}
+  </style>
+
+  <div class="vertical-section vertical-section-container centered">
+	
+    <!--<template is="dom-repeat" items="{{inquirer}}">-->
+    <template id="fc-studentObject">
+      <iron-localstorage name="polymer-localstorage-inquirer-test"  value="{{inquirer}}" on-iron-localstorage-load-empty="ready"></iron-localstorage>
+           <button onclick="myTimeDisplay()">Add Call</button>
+       <fc2-phoneLogEntry on-tap="toggleForm">
+         <div class="horizontal layout center">
+	   <div id="btnTime">
+	   <div class="flex" margin="20px"><span>{{inquirer.studentFirstName}}</span> <span>{{inquirer.studentLastName}}</span> <span>{{inquirer.studentPhone}}</span> called to register her <span>{{inquirer.studentFirstName}}</span> <span>{{inquirer.studentLastName}}</span>. She can be reached by phone (<span>{{inquirer.studentPhone}}</span>) or email: <span>{{inquirer.studentEmail}}</span> for the <span> CLASS INTEREST ON FORM NOT THERE YET</span> She has placed a deposit of XXX on her creditcard. See below.</div>
+	   </div>
+	   <div><iron-icon id="headerIcon" icon="icons:add"></iron-icon></div>
+	 </div>
+       </fc2-phoneLogEntry>
+       <iron-collapse id="collapsedForm">
+         <div class="vertical layout">
+           <div class="horizontal layout wrap">
+              <div>
+                <paper-input value="{{inquirer.studentFirstName}}" autocomplete="on" id="studentFirstName" label="Student First Name" name="studentFirstName">
+            	</paper-input>
+              </div>
+              <div>
+                <paper-input value="{{inquirer.studentLastName}}" autocomplete="on" type="string" id="studentLastName" name="studentLastName" label="Student Last Name">
+            	</paper-input>
+              </div>
+              <div>
+                <gold-phone-input value="{{inquirer.studentPhone}}" autocomplete="on" id="studentPhone">
+            	</gold-phone-input>
+              </div>
+              <div>
+                <gold-email-input auto-validate required value="{{inquirer.studentEmail}}" autocomplete="on" id="studentEmail">
+            	</gold-email-input>
+              </div>
+           </div><!-- End of First Row -->
+           <div class="horizontal layout wrap">
+              <div>
+                <paper-input value="{{inquirer.studentStreetAddress}}" id="studentStreetAddress" autocomplete="on" label="Address">
+            	</paper-input>
+              </div>
+              <div>
+                <paper-input value="{{inquirer.studentCityAddress}}" id="studentCityAddress" autocomplete="on" label="Address">
+            	</paper-input>
+              </div>
+              <div>
+                <paper-input value="{{inquirer.studentState}}" id="State" label="U.S. State"></paper-input>
+              </div>
+              <div>
+                <gold-zip-input value="{{inquirer.studentZipCode}}" id="studentZipCode" label="Zip Code">
+            	</gold-zip-input>
+              </div>
+           </div><!-- End of Second Row -->
+         </div><!-- End of Table -->
+         <!--<content></content>-->
+      </iron-collapse> </div>
+      <div>
+      <template id="studentcard22">
+     <p><span>{{inquirer.studentFirstName}}</span> <span>{{inquirer.studentLastName}}</span> <span>{{inquirer.studentPhone}}</span> called to register her <span>{{inquirer.studentFirstName}}</span> <span>{{inquirer.studentLastName}}</span>. She can be reached by phone (<span>{{inquirer.studentPhone}}</span>) or email: <span>{{inquirer.studentEmail}}</span> for the <span> CLASS INTEREST ON FORM NOT THERE YET</span> She has placed a deposit of XXX on her creditcard. See below.</p>
+      <div class="layout-vertical-container" height="100vh" border="4px ridge #aecdfe">
+      <div class="flex-3" overflow-y="scroll" border="4px ridge #aecdfe">hello world</div>
+      <div class="flex-5" overflow-y="scroll" border="4px ridge #aecdfe">hello world 2.0</div>
+      <!--the previous call logs and info from database-->
+      </div><!--container ender-->
+      </template>
+      </template>
+  </div>
+   </div>
+   <script>
+function myTimeDisplay()
+{
+	document.getElementById('btnTime').innerHTML+=Date().substring(0,24);
+}
+</script>
+  <script>
+    Polymer({
+      is: 'fc3-inquirer',
+      properties: {
+        inquirer: {
+          type: Object
+        }
+      },
+      toggleForm: function(){
+    	this.$.collapsedForm.toggle();
+    	this.$.headerIcon.icon = this.$.collapsedForm.opened ? "icons:remove":"icons:add";
+      },
+      // initializes default if nothing has been stored
+      ready: function() {
+        this.inquirer = [{
+          studentFirstName: 'Julius',
+          studentLastName: 'Zane',
+          studentPhone: '732-671-1834',
+          studentEmail: 'julius@focusedcoaching.com',
+          studentStreetAddress: '331 Newman Spring Road, Suite 143, 4th Floor',
+          studentCityAddress: 'Red Bank',
+          studentZipCode: '07701',
+          studentState: 'New Jersey'
+        },
+        {
+          studentFirstName: 'Derp',
+          studentLastName: 'Zane',
+          studentPhone: '732-671-1834',
+          studentEmail: 'julius@focusedcoaching.com',
+          studentStreetAddress: '331 Newman Spring Road, Suite 143, 4th Floor',
+          studentCityAddress: 'Red Bank',
+          studentZipCode: '07701',
+          studentState: 'New Jersey'
+        },{
+          studentFirstName: 'Moron',
+          studentLastName: 'Zane',
+          studentPhone: '732-671-1834',
+          studentEmail: 'julius@focusedcoaching.com',
+          studentStreetAddress: '331 Newman Spring Road, Suite 143, 4th Floor',
+          studentCityAddress: 'Red Bank',
+          studentZipCode: '07701',
+          studentState: 'New Jersey'
+        }];
+      }
+   });
+
+</script>
+</dom-module>

@@ -1,0 +1,87 @@
+<dom-module id="fc6-inquirer">
+  <style is="custom-style">
+.horizontal.layout.wrap div{
+	margin: 5px;
+}
+  </style>
+
+  <div class="vertical-section vertical-section-container centered">
+
+    <template id="fc-studentObject">
+      <iron-localstorage name="polymer-localstorage-inquirer-test"  object="{{inquirer}}" value="{{inquirer}}" on-iron-localstorage-load-empty="initializeDefaultInquirer"></iron-localstorage>
+       <fc2-papermaterial on-tap="toggleForm">
+         <div class="horizontal layout center">
+	   <div class="flex"><span onclick="timeDisplay()"></span></div>
+	   <div><iron-icon id="headerIcon" icon="icons:add"></iron-icon></div>
+	 </div>
+       </fc2-papermaterial>
+       <iron-collapse id="collapsedForm">
+         <div class="vertical layout">
+           <div class="horizontal layout wrap">
+              <div>
+                <paper-input value="{{inquirer.studentFirstName}}" autocomplete="on" id="studentFirstName" label="Student First Name" name="studentFirstName">
+            	</paper-input>
+              </div>
+              <div>
+                <paper-input value="{{inquirer.studentLastName}}" autocomplete="on" type="string" id="studentLastName" name="studentLastName" label="Student Last Name">
+            	</paper-input>
+              </div>
+              <div>
+                <gold-phone-input value="{{inquirer.studentPhone}}" autocomplete="on" id="studentPhone">
+            	</gold-phone-input>
+              </div>
+              <div>
+                <gold-email-input auto-validate required value="{{inquirer.studentEmail}}" autocomplete="on" id="studentEmail">
+            	</gold-email-input>
+              </div>
+           </div><!-- End of First Row -->
+           <div class="horizontal layout wrap">
+              <div>
+                <paper-input value="{{inquirer.studentStreetAddress}}" id="studentStreetAddress" autocomplete="on" label="Address">
+            	</paper-input>
+              </div>
+              <div>
+                <paper-input value="{{inquirer.studentCityAddress}}" id="studentCityAddress" autocomplete="on" label="Address">
+            	</paper-input>
+              </div>
+              <div>
+                <paper-input value="{{inquirer.studentState}}" id="State" label="U.S. State"></paper-input>
+              </div>
+              <div>
+                <gold-zip-input value="{{inquirer.studentZipCode}}" id="studentZipCode" label="Zip Code">
+            	</gold-zip-input>
+              </div>
+           </div><!-- End of Second Row -->
+         </div><!-- End of Table -->
+      </iron-collapse>
+    </template>
+  </div>
+  <script>
+  fcInquirer()=  Polymer({
+      is: 'fc5-inquirer',
+      properties: {
+        inquirer: {
+          type: Object
+        }
+      },
+      toggleForm: function(){
+    	this.$.collapsedForm.toggle();
+    	this.$.headerIcon.icon = this.$.collapsedForm.opened ? "icons:remove":"icons:add";
+      },
+      // initializes default if nothing has been stored
+      initializeDefaultInquirer: function() {
+        this.inquirer = {
+          studentFirstName: 'Julius',
+          studentLastName: 'Zane',
+          studentPhone: '732-671-1834',
+          studentEmail: 'julius@focusedcoaching.com',
+          studentStreetAddress: '331 Newman Spring Road, Suite 143, 4th Floor',
+          studentCityAddress: 'Red Bank',
+          studentZipCode: '07701',
+          studentState: 'New Jersey'
+        }
+      }
+   });
+
+</script>
+</dom-module>

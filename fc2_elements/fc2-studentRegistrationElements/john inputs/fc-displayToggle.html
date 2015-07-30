@@ -1,0 +1,32 @@
+<dom-module id="fc-parentTwoContactInfoHider">
+<style>
+.form_header {
+	font-size: 20px;
+	font-weight: 800;
+	background: #aecdfe;
+	padding: 8px;
+	color: #002c80;
+	border-radius: 3px;
+	text-indent: 10px;
+}	
+</style>
+	<template>
+								
+		<div id='toggler' on-change="hider">Parent Two Contact Information</div>  
+		<p id='regionToHide' hidden="{{hiding}}"><content></content></p>
+	</template>
+	<script>
+		Polymer({
+		  is: "fc-parentTwoContactInfoHider",  
+     		  properties: {
+     		  	hiding: {
+     		  		type: Boolean,
+     		  		value: false
+     		  	}
+     		  },
+          	  hider: function(){
+          	  	this.hiding = !this.hiding;
+          	  },
+		});
+	</script>
+</dom-module>

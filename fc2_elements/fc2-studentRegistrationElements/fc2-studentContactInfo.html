@@ -1,0 +1,193 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<dom-module id='fc2-studentContactInfo'>
+<style is="custom-style">
+
+.buttonsBoom::shadow paper-ripple {
+  	color: blue;
+  	text-size: 13pt;
+}
+.horizontal.layout.wrap div{
+	margin: 5px;
+}
+
+</style>
+  <template>
+  
+  <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://focusedstaging1.firebaseio.com" provider="password" on-user-created="setNewUserUID"></firebase-auth>
+  <firebase-document id="FBplace" location="https://focusedstaging1.firebaseio.com/users" object="{{this.user}}"></firebase-document>
+				<fc2-papermaterial on-tap="toggleForm">
+				  <div class="horizontal layout center">
+				    <div class="flex">Student Contact Information</div>
+				    <div><iron-icon id="headerIcon" icon="icons:add"></iron-icon></div>
+				  </div>
+				</fc2-papermaterial>
+				<iron-collapse id="collapsedForm">
+				<paper-form elevation="2">
+				<div class="vertical layout">
+					<div class="horizontal layout wrap">
+					  <div>
+					    <paper-input value="{{studentFirstName}}" autocomplete="on" id="studentFirstName" label="Student First Name" name="studentFirstName">
+					    </paper-input>
+					  </div>
+					  <div>
+					    <paper-input value="{{studentLastName}}" autocomplete="on" type="string" id="studentLastName" name="studentLastName" elevation="5" label="Student Last Name">
+					    </paper-input>
+					  </div>
+					  <div>
+					    <gold-phone-input value="{{studentPhone}}" autocomplete="on" id="studentPhone">
+					    </gold-phone-input> 
+					  </div>
+					  <div>
+					    <gold-email-input auto-validate required value="{{studentEmail}}" autocomplete="on" id="studentEmail">
+					    </gold-email-input>
+					  </div>
+					</div><!-- End of First Row -->
+					<div class="horizontal layout wrap">
+					  <div>
+					    <paper-input value="{{studentStreetAddress}}" id="studentStreetAddress" autocomplete="on" label="Address">
+					    </paper-input>
+					  </div>
+					  <div>
+					    <paper-input value="{{studentCityAddress}}" id="studentCityAddress" autocomplete="on" label="Address">
+					    <paper-input>
+					  </div>
+					  <div>
+					    <paper-input value="{{studentState}} "id="State" label="U.S. State"></paper-input> 
+					  </div>
+					  <div>
+					    <gold-zip-input> value="{{studentZipCode}}" id="studentZipCode" label="Zip Code">
+					    </gold-zip-input>
+					  </div>
+					</div><!-- End of Second Row -->
+					<div>
+					  <button font-size="13px" class="buttonsBoom" elevation="3" on-tap="submit" raised width="300px">Register Caller</button>
+					</div>
+				</div><!-- End of Table -->
+	</paper-form>
+	</iron-collapse>
+</template>
+<script>
+
+Polymer ({
+     is: 'fc2-studentContactInfo',
+     properties:{
+	provider: {
+          type: String,
+          value: 'password'
+      	},
+      	message: {
+          type: String,
+          value: ''
+      	},
+
+      	password: {
+          type: String,
+          value: 'Focused1'
+      	},
+
+      	user: {
+          type: Object,
+          value: null
+      	},
+	
+	new_user_uid: {
+	  type: String,
+	  value: ''
+	},
+	
+	studentFirstName: {
+	  type: String,
+	  value: '',
+	  notify: true
+	},
+	
+	studentLastName: {
+	  type: String,
+	  value: '',
+	  notify: true
+	},
+	
+	studentPhone: {
+	  type: String,
+	  value: '',
+	  notify: true
+	},
+	
+	studentEmail: {
+	  type: String,
+	  value: '',
+	  notify: true
+	},
+	
+	studentStreetAddress: {
+	  type: String,
+	  value: '',
+	  notify: true
+	},
+	
+	studentCityAddress: {
+	  type: String,
+	  value: '',
+	  notify: true
+	},
+	
+	studentZip: {
+		type: String,
+		value: '',
+		notify: true
+	},
+	
+	studentState: {
+		type: String,
+		value: '',
+		notify: true
+	
+	},
+	
+      	statusKnown: {
+          type: Boolean
+        }
+    },
+    toggleForm: function(){
+    	this.$.collapsedForm.toggle();
+    	this.$.headerIcon.icon = this.$.collapsedForm.opened ? "icons:remove":"icons:add";
+    },
+    submit: function(){
+	this.addUserToAuth();
+    },
+    addUserToAuth: function(){
+    	this.$.firebaseLogin.createUser(this.studentEmail, this.password);
+    	//this.login();
+    },
+    login: function() {
+      var params = {"email":this.studentEmail,"password":this.password};
+      this.$.firebaseLogin.login(params);
+    },
+    logout: function(){
+    	this.$.firebaseLogin.logout();
+    },
+    setNewUserUID: function(e){
+    	this.new_user_uid = e.detail.uid;
+    	this.addUserInfoToUsers();
+    },
+    addUserInfoToUsers: function(){
+    	this.$.FBplace._setRemoteDocumentChild(this.new_user_uid, {
+    		"studentFirstName":this.studentFirstName,
+    		"studentLastName":this.studentLastName,
+    		"studentEmail": this.studentEmail,
+    		"studentStreetAddress": this.studentStreetAddress,
+    		"studentCityAddress": this.studentCityAddress,
+    		"studentTelephone": this.studentPhone
+    		});
+  	 }	
+});
+</script>
+</dom-module>

@@ -1,0 +1,17 @@
+<dom-module id="fc2-john-inputarea">
+	<template id="test_value_input">
+		<paper-input label="Test Value" required value="{{test_value}}"></paper-input>
+	</template>
+	<script>
+	  Polymer({
+	    is: 'fc2-john-inputarea',
+	    properties: {
+	    	test_value: {
+	    	  type: String,
+	    	  value: '',
+	    	  notify: true
+	    	}
+	    }
+	  });
+	</script>
+</dom-module>

@@ -1,0 +1,131 @@
+.full {padding:0;margin:0;background:#000;height:100%;}
+
+.wrap {
+    width: 85%;
+    float:left;
+    overflow:hidden;
+    height:100%;
+    background: pink;
+}
+
+.resizable_a {
+    width: 40%;
+    height:100%;
+    padding: 0;
+    display: block;
+    float:left;
+    color:#000;
+    position:relative; 
+}
+
+.resizable_b {
+    width: 39%;
+    height:100%;
+    padding: 0;
+    display: block;
+    float:left;
+    color:#000;
+    position:relative; 
+
+.resizable1 {
+    background-color: #f3f3f3;
+    float:left;
+}
+
+.resizable2 {
+    background-color: #eaeaea;
+    float:right;
+}
+
+.resizable .inner {
+  padding:40px;
+  overflow:hidden;
+  overflow-y:auto;
+  position:absolute; 
+  height:100%;
+  top:0;
+  left:0;
+  -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.resizable1 .inner {
+  margin-right:12px;
+}
+.resizable2 .inner {
+  margin-left:7px;
+}
+
+.ui-resizable-e { 
+    cursor: e-resize; 
+    display:block!important;
+    width: 14px; 
+    right: -7px; 
+    top: 0; 
+    bottom: 0; 
+    background: #333;
+   
+}
+
+table, th, td {
+    border: 0px ridge #aecdfe;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 0px 5px 10px 20px;
+    text-align: left;
+}
+table#t01 {
+    width: auto;    
+    background-color: #f1f1c1;
+}
+.FC_Student_Contact_Fieldset {
+	position: center;
+}
+
+.FC_Parent_Contact_Fieldset {
+	position: center;
+}
+
+
+p {text-indent: 20px;}
+
+.questions { 
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	 -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+		font-size:15px;
+}
+.Focused_Data_Assistant_Class { 
+	width: 39%;
+	background: white;
+	display: block;
+	height: 100%;
+	float: right;
+}
+
+fieldset {
+	border: 4px solid #aecdfe;
+	background: #f4f4f4;
+	border-radius: 8px
+}
+
+legend { 
+font-size: 18px;
+}
+.form_header {
+	font-size: 20px;
+	font-weight: 800;
+	background: #aecdfe;
+	margin: -7px -12px;
+	padding: 10px;
+	color: #002c80;
+	border-radius: 3px;
+	halign: center;
+}	
+.FC_form_table {
+	color: #002c80;
+}
